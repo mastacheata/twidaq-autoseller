@@ -1,0 +1,9 @@
+{
+    "raven_dsn": "https://TOKEN:SECRET@SENTRY/PROJECT",
+    "twidaq_api": {
+        "consumer_key": "APP_KEY",
+        "consumer_secret": "APP_SECRET",
+        "token": "USER_TOKEN",
+        "token_secret": "USER_TOKEN_SECRET"
+    }
+}

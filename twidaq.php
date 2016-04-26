@@ -9,7 +9,9 @@ use Monolog\Logger;
 use Monolog\Handler\RavenHandler;
 use Monolog\Formatter\LineFormatter;
 
-$client = new Raven_Client('***REMOVED***');
+$config = json_decode(file_get_contents(__DIR__.'/config.json'), true);
+
+$client = new Raven_Client($config['raven_dsn']);
 $log = new Logger('twidaq-autoseller');
 $handler = new RavenHandler($client);
 $handler->setFormatter(new LineFormatter("%message%\n"));
@@ -17,12 +19,7 @@ $log->pushHandler($handler);
 
 $stack = HandlerStack::create();
 
-$middleware = new Oauth1([
-    'consumer_key'    => '***REMOVED***',
-    'consumer_secret' => '***REMOVED***',
-    'token'           => '***REMOVED***',
-    'token_secret'    => '***REMOVED***',
-]);
+$middleware = new Oauth1($config['twidaq_api']);
 $stack->push($middleware);
 
 $client = new Client([
@@ -53,6 +50,9 @@ foreach($portfolio as $item) {
             if($item->stock->ceo_code == 'Mastacheata' || $stockId == 'fabpot') {
                 $item->volume = $item->volume <= 26 ? (intval($item->volume) - 1) : 25;
                 if ($item->volume < 1) continue;
+            }
+            elseif($stockId == 'samsonginfo') {
+                continue;
             }
             else {
                 $item->volume = $item->volume <= 25 ? $item->volume : 25;

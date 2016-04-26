@@ -2,3 +2,4 @@ vendor/
 sales.log
 sales.txt
 stocks.json
+config.json
