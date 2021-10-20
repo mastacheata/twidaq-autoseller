@@ -2,7 +2,7 @@
     "name": "xenzilla/twidaq-autoseller",
     "require": {
         "guzzlehttp/guzzle": "~6.0",
-        "guzzlehttp/oauth-subscriber": "0.3.*",
+        "guzzlehttp/oauth-subscriber": "0.6.*",
         "monolog/monolog": "^1.19",
         "raven/raven": "^0.13.0"
     },
